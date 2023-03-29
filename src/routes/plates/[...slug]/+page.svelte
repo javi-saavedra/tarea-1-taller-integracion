@@ -69,7 +69,7 @@
     </div>
 
     <div class="mt-20 flex justify-between" class:mb-20={reviews.length === 0}>
-      <h1 class="font-serif text-2xl text-gray-600">Reseñas del menú</h1>
+      <h1 class="font-serif text-2xl text-gray-600">Reseñas del plato</h1>
       <button
         class="bg-white border border-gray-300 rounded-lg p-3 font-medium hover:bg-gray-100"
         on:click={() => {toggle = true}}
