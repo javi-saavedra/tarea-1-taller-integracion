@@ -3,15 +3,30 @@
   import { Icon } from '@steeze-ui/svelte-icon'
   import { Star } from '@steeze-ui/heroicons'
   import { AvatarGenerator } from 'random-avatar-generator';
+  import Filters from "./Filters.svelte";
+  import _ from 'lodash';
 
   export let reviews: Review[];
   const generator = new AvatarGenerator();
+
+  let sort = 'date';
+  let order = 'asc';
+  const options = [
+    {value: 'date', label: 'Fecha'},
+    {value: 'rating', label: 'Rating'}
+  ]
+
+  $: sortedReviews = _.sortBy(reviews, [sort]);
+  $: orderedReviews = order === 'asc' ? sortedReviews : _.reverse([...sortedReviews]);
 </script>
 
 
 <div class="flow-root">
+  <div class="w-full flex justify-start my-10">
+    <Filters bind:sort={sort} bind:order={order} {options} />
+  </div>
   <div class="-my-12 divide-y divide-gray-200">
-    {#each reviews as review}
+    {#each orderedReviews as review}
     <div class="py-12">
       <div class="flex items-center">
         <img src={generator.generateRandomAvatar()} alt="avatar" class="h-12 w-12 rounded-full">

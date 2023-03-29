@@ -4,7 +4,10 @@
 
   export let sort: string | undefined;
   export let order: string | undefined;
-
+  export let options: {value: string; label: string}[] = [
+    {value: 'name', label: 'Nombre'},
+    {value: 'price', label: 'Precio'},
+  ]
   const changeOrder = () => {
     if (order === 'asc') {
       order = 'desc';
@@ -22,8 +25,9 @@
     <select
       bind:value={sort}
       class="relative inline-flex items-center rounded-l-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50 focus:z-10">
-      <option value="name">Nombre</option>
-      <option value="price">Precio</option>
+      {#each options as option}
+        <option value={option.value}>{option.label}</option>
+      {/each}
     </select>
     <div class="relative -ml-px block">
       <button
